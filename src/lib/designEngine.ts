@@ -16,6 +16,7 @@ export const ITEM_OPTIONS: ItemOption[] = [
   { id: "llaves", label: "Llaves", zone: "inner" },
   { id: "audifonos", label: "Audífonos", zone: "inner" },
   { id: "maquillaje", label: "Maquillaje", zone: "inner" },
+  { id: "cargador", label: "Cargador", zone: "inner" },
 ];
 
 export const ZONE_INFO: Record<Zone, { label: string; hint: string }> = {
