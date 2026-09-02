@@ -68,6 +68,12 @@ interior). `src/components/BagDesigner.tsx` dibuja el diagrama de la bolsa
 y guarda el diseño en Supabase (tabla `designs`) si las variables de
 entorno están configuradas.
 
+### Objetos disponibles
+
+La lista vive en `ITEM_OPTIONS` dentro de `src/lib/designEngine.ts`.
+Actualmente incluye: celular, laptop/tablet, botella de agua, libreta,
+plumas y lápices, cartera, llaves, audífonos, maquillaje y cargador.
+
 ## Estructura del proyecto
 
 ```
