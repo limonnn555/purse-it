@@ -8,6 +8,7 @@ const users = [
   "Dueños de negocio",
   "Mamás trabajadoras",
   "Arquitectos",
+  "Freelancers",
 ];
 
 export default function Home() {
