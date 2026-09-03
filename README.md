@@ -80,6 +80,7 @@ plumas y lápices, cartera, llaves, audífonos, maquillaje y cargador.
 src/
   app/
     page.tsx         Homepage + herramienta de diseño
+    core/page.tsx     Núcleo de diseño (texto libre -> principios)
     docs/page.tsx     Cómo funciona
     roadmap/page.tsx  Roadmap del producto
     layout.tsx        Layout raíz (incluye Navbar y Footer)
@@ -88,11 +89,14 @@ src/
     Navbar.tsx
     Footer.tsx
     BagDesigner.tsx    Formulario + diagrama del diseño generado
+    CoreAgent.tsx      Formulario + tarjeta del núcleo de diseño
   lib/
     designEngine.ts    Lógica que asigna objetos a zonas de la bolsa
+    coreEngine.ts      Lógica por palabras clave que genera el núcleo
     supabaseClient.ts  Cliente de Supabase
 supabase/
   schema.sql           Tabla `designs` para guardar cada diseño generado
+  core_schema.sql      Tabla `core_outputs` para guardar cada núcleo generado
 ```
 
 ## Deploy en Vercel
