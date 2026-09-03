@@ -76,6 +76,18 @@ export const CORE_PROFILES: CoreProfile[] = [
     mantra: "Lista para moverse contigo.",
     keywords: ["ejercicio", "deporte", "gym", "correr", "entreno", "bicicleta"],
   },
+  {
+    id: "estudiante-enfocada",
+    title: "Núcleo Estudiante Enfocada",
+    zone: "main",
+    principles: [
+      "Espacio dedicado para libros, cuadernos y laptop sin que se doblen.",
+      "Bolsillo de acceso rápido para lo que usas entre clases.",
+      "Ligera para cargarla todo el día en la escuela.",
+    ],
+    mantra: "Enfocada en lo que importa, clase tras clase.",
+    keywords: ["escuela", "universidad", "clases", "cuadernos", "libros", "salon"],
+  },
 ];
 
 const DEFAULT_PROFILE: CoreProfile = {
