@@ -109,6 +109,7 @@ export type CoreOutput = {
   zoneLabel: string;
   principles: string[];
   mantra: string;
+  isFallback: boolean;
 };
 
 function normalize(text: string): string {
@@ -141,5 +142,6 @@ export function generateCore(inputText: string): CoreOutput {
     zoneLabel: ZONE_INFO[bestProfile.zone].label,
     principles: bestProfile.principles,
     mantra: bestProfile.mantra,
+    isFallback: bestProfile.id === DEFAULT_PROFILE.id,
   };
 }

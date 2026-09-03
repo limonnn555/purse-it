@@ -138,6 +138,14 @@ export default function CoreAgent() {
               &ldquo;{core.mantra}&rdquo;
             </p>
 
+            {core.isFallback && (
+              <p className="mt-3 text-xs text-muted">
+                No detectamos un patrón muy específico en tu descripción —
+                este es un núcleo genérico. Prueba dar más detalles de tu
+                rutina para uno más preciso.
+              </p>
+            )}
+
             <button
               type="button"
               onClick={handleSave}
