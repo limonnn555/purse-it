@@ -81,7 +81,8 @@ export default function CoreAgent() {
         <h2 className="text-lg font-semibold">Cuéntanos de ti</h2>
         <p className="mt-1 text-sm text-muted">
           Describe cómo es tu día y qué cargas. Entre más detalle des, más
-          preciso será tu núcleo de diseño.
+          preciso será tu núcleo de diseño. Por ejemplo: rutina de oficina,
+          de viaje, de ejercicio o de escuela.
         </p>
 
         <div className="mt-6">
