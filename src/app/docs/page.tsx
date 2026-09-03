@@ -41,6 +41,21 @@ export default function DocsPage() {
             para poder revisarlo más adelante.
           </p>
         </div>
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="font-medium">4. Núcleo de diseño (/core)</h2>
+          <p className="mt-2 text-sm text-muted">
+            En <code>/core</code> describes con tus propias palabras cómo es
+            tu día y qué cargas. <code>src/lib/coreEngine.ts</code> busca
+            palabras clave en ese texto (oficina/laptop, viaje/pasaporte,
+            ejercicio/deporte, objetos chicos como llaves o maquillaje, etc.)
+            y arma un &ldquo;núcleo de diseño&rdquo;: un título, la zona de
+            la bolsa que deberías priorizar, 3-4 principios y una frase
+            resumen. No usa un modelo de IA real — es lógica basada en
+            reglas, para que el resultado sea consistente y explicable. Cada
+            núcleo generado se puede guardar en la tabla{" "}
+            <code>core_outputs</code> de Supabase.
+          </p>
+        </div>
       </div>
     </div>
   );
