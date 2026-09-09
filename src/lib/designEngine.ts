@@ -7,34 +7,34 @@ export type ItemOption = {
 };
 
 export const ITEM_OPTIONS: ItemOption[] = [
-  { id: "celular", label: "Celular", zone: "front" },
+  { id: "celular", label: "Phone", zone: "front" },
   { id: "laptop", label: "Laptop / tablet", zone: "main" },
-  { id: "botella", label: "Botella de agua", zone: "side" },
-  { id: "libreta", label: "Libreta / cuaderno", zone: "main" },
-  { id: "plumas", label: "Plumas y lápices", zone: "inner" },
-  { id: "cartera", label: "Cartera", zone: "front" },
-  { id: "llaves", label: "Llaves", zone: "inner" },
-  { id: "audifonos", label: "Audífonos", zone: "inner" },
-  { id: "maquillaje", label: "Maquillaje", zone: "inner" },
-  { id: "cargador", label: "Cargador", zone: "inner" },
+  { id: "botella", label: "Water bottle", zone: "side" },
+  { id: "libreta", label: "Notebook", zone: "main" },
+  { id: "plumas", label: "Pens & pencils", zone: "inner" },
+  { id: "cartera", label: "Wallet", zone: "front" },
+  { id: "llaves", label: "Keys", zone: "inner" },
+  { id: "audifonos", label: "Headphones", zone: "inner" },
+  { id: "maquillaje", label: "Makeup", zone: "inner" },
+  { id: "cargador", label: "Charger", zone: "inner" },
 ];
 
 export const ZONE_INFO: Record<Zone, { label: string; hint: string }> = {
   main: {
-    label: "Compartimento principal",
-    hint: "Espacio amplio, ideal para lo más grande que cargas.",
+    label: "Main compartment",
+    hint: "Roomy space, ideal for the biggest thing you carry.",
   },
   front: {
-    label: "Bolsillo frontal",
-    hint: "Acceso rápido, para lo que usas todo el tiempo.",
+    label: "Front pocket",
+    hint: "Quick access, for what you use all the time.",
   },
   side: {
-    label: "Bolsillo lateral",
-    hint: "Elástico, para lo que no quieres que se moje o se caiga.",
+    label: "Side pocket",
+    hint: "Stretchy, for what you don't want to get wet or fall out.",
   },
   inner: {
-    label: "Organizador interior",
-    hint: "Con separadores, para objetos chicos.",
+    label: "Inner organizer",
+    hint: "With dividers, for small items.",
   },
 };
 
@@ -44,17 +44,17 @@ export const BAG_SIZES: { id: BagSizeId; label: string; description: string }[] 
   {
     id: "mini",
     label: "Mini",
-    description: "Bolsa de mano, lo esencial.",
+    description: "Handbag, just the essentials.",
   },
   {
     id: "mediana",
-    label: "Mediana",
-    description: "Bolsa de día, para lo de todos los días.",
+    label: "Medium",
+    description: "Day bag, for everyday use.",
   },
   {
     id: "grande",
-    label: "Grande",
-    description: "Mochila o tote, para cargar de todo.",
+    label: "Large",
+    description: "Backpack or tote, for carrying everything.",
   },
 ];
 

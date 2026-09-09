@@ -28,17 +28,17 @@ function BagDiagram({ design }: { design: GeneratedDesign }) {
     <svg
       viewBox="0 0 240 260"
       role="img"
-      aria-label="Diagrama de la bolsa generada"
+      aria-label="Diagram of the generated bag design"
       className="mx-auto w-full max-w-[260px]"
     >
-      {/* asas */}
+      {/* handles */}
       <path
         d="M85 60 C85 25, 155 25, 155 60"
         fill="none"
         stroke="var(--border)"
         strokeWidth={4}
       />
-      {/* cuerpo principal */}
+      {/* main body */}
       <rect
         x={40}
         y={60}
@@ -47,7 +47,7 @@ function BagDiagram({ design }: { design: GeneratedDesign }) {
         rx={20}
         style={zoneStyle("main")}
       />
-      {/* organizador interior (punteado) */}
+      {/* inner organizer (dashed) */}
       <rect
         x={60}
         y={75}
@@ -57,7 +57,7 @@ function BagDiagram({ design }: { design: GeneratedDesign }) {
         style={zoneStyle("inner")}
         strokeDasharray="5 4"
       />
-      {/* bolsillo frontal */}
+      {/* front pocket */}
       <rect
         x={60}
         y={165}
@@ -66,7 +66,7 @@ function BagDiagram({ design }: { design: GeneratedDesign }) {
         rx={10}
         style={zoneStyle("front")}
       />
-      {/* bolsillo lateral */}
+      {/* side pocket */}
       <rect
         x={188}
         y={95}
@@ -125,13 +125,13 @@ export default function BagDesigner() {
         onSubmit={handleGenerate}
         className="rounded-2xl border border-border bg-surface p-6"
       >
-        <h2 className="text-lg font-semibold">¿Qué llevas todos los días?</h2>
+        <h2 className="text-lg font-semibold">What do you carry every day?</h2>
         <p className="mt-1 text-sm text-muted">
-          Selecciona tus objetos, elige un tamaño, y Purse It arma el diseño.
+          Select your items, choose a size, and Purse It builds the design.
         </p>
 
         <fieldset className="mt-6">
-          <legend className="text-sm font-medium">Tamaño de bolsa</legend>
+          <legend className="text-sm font-medium">Bag size</legend>
           <div className="mt-3 grid grid-cols-3 gap-2">
             {BAG_SIZES.map((option) => (
               <button
@@ -154,7 +154,7 @@ export default function BagDesigner() {
         </fieldset>
 
         <fieldset className="mt-6">
-          <legend className="text-sm font-medium">Tus objetos</legend>
+          <legend className="text-sm font-medium">Your items</legend>
           <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
             {ITEM_OPTIONS.map((item) => (
               <label
@@ -179,18 +179,18 @@ export default function BagDesigner() {
 
         <div className="mt-6">
           <label className="text-sm font-medium" htmlFor="custom-items">
-            ¿Algo más que quieras agregar?
+            Anything else you&apos;d like to add?
           </label>
           <input
             id="custom-items"
             type="text"
             value={customText}
             onChange={(event) => setCustomText(event.target.value)}
-            placeholder="Ej. red organizadora, cargador, lentes de sol"
+            placeholder="E.g. mesh pouch, charger, sunglasses"
             className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
           />
           <p className="mt-1 text-xs text-muted">
-            Sepáralos con comas si quieres agregar más de uno.
+            Separate them with commas if you want to add more than one.
           </p>
         </div>
 
@@ -198,17 +198,17 @@ export default function BagDesigner() {
           type="submit"
           className="mt-6 w-full rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
         >
-          Generar diseño
+          Generate design
         </button>
       </form>
 
       <div className="rounded-2xl border border-border bg-surface p-6">
-        <h2 className="text-lg font-semibold">Tu diseño</h2>
+        <h2 className="text-lg font-semibold">Your design</h2>
 
         {!design && (
           <p className="mt-4 text-sm text-muted">
-            Llena el formulario y dale clic a &ldquo;Generar diseño&rdquo;
-            para ver la distribución de tu bolsa aquí.
+            Fill out the form and click &ldquo;Generate design&rdquo; to see
+            your bag layout here.
           </p>
         )}
 
@@ -217,7 +217,7 @@ export default function BagDesigner() {
             <BagDiagram design={design} />
 
             <p className="mt-4 text-center text-sm font-medium">
-              Bolsa {BAG_SIZES.find((s) => s.id === design.size)?.label}
+              {BAG_SIZES.find((s) => s.id === design.size)?.label} bag
             </p>
 
             <div className="mt-6 space-y-4">
@@ -245,7 +245,7 @@ export default function BagDesigner() {
               {design.custom.length > 0 && (
                 <div>
                   <p className="text-sm font-medium">
-                    Compartimentos personalizados
+                    Custom compartments
                   </p>
                   <ul className="mt-1 flex flex-wrap gap-2">
                     {design.custom.map((label) => (
@@ -263,13 +263,13 @@ export default function BagDesigner() {
 
             {saveState === "saved" && (
               <p className="mt-4 text-xs text-muted">
-                Diseño guardado en tu base de datos.
+                Design saved to your database.
               </p>
             )}
             {saveState === "error" && (
               <p className="mt-4 text-xs text-muted">
-                No se pudo guardar en la base de datos (revisa la conexión a
-                Supabase), pero tu diseño sigue visible arriba.
+                Couldn&apos;t save to the database (check your Supabase
+                connection), but your design is still visible above.
               </p>
             )}
           </div>

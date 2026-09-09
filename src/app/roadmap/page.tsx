@@ -4,29 +4,29 @@ export const metadata = {
 
 const roadmap = [
   {
-    phase: "Hoy",
-    status: "Disponible",
+    phase: "Today",
+    status: "Available",
     items: [
-      "Elegir tamaño de bolsa y objetos diarios",
-      "Generar un diseño con compartimentos asignados",
-      "Guardar cada diseño generado",
+      "Choose bag size and daily items",
+      "Generate a design with assigned compartments",
+      "Save every generated design",
     ],
   },
   {
-    phase: "Próximamente",
-    status: "En desarrollo",
+    phase: "Coming soon",
+    status: "In development",
     items: [
-      "Vista previa más realista del diseño (colores, materiales)",
-      "Guardar y comparar varios diseños por usuario",
-      "Compartir el diseño generado como imagen",
+      "More realistic design preview (colors, materials)",
+      "Save and compare multiple designs per user",
+      "Share the generated design as an image",
     ],
   },
   {
-    phase: "Más adelante",
-    status: "Explorando",
+    phase: "Later",
+    status: "Exploring",
     items: [
-      "Cotización estimada de fabricación por diseño",
-      "Recomendaciones según el estilo de vida del usuario",
+      "Estimated manufacturing quote per design",
+      "Recommendations based on the user's lifestyle",
     ],
   },
 ];
@@ -38,11 +38,11 @@ export default function RoadmapPage() {
         Roadmap
       </p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight">
-        Hacia dónde va Purse It
+        Where Purse It is headed
       </h1>
       <p className="mt-4 text-muted">
-        Así es como planeamos seguir mejorando la forma en que se diseñan
-        bolsas a la medida.
+        Here&apos;s how we plan to keep improving the way custom bags get
+        designed.
       </p>
 
       <ol className="mt-10 space-y-6">

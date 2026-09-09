@@ -2,12 +2,12 @@ import Link from "next/link";
 import BagDesigner from "@/components/BagDesigner";
 
 const users = [
-  "Estudiantes",
-  "Doctores",
-  "Atletas",
-  "Dueños de negocio",
-  "Mamás trabajadoras",
-  "Arquitectos",
+  "Students",
+  "Doctors",
+  "Athletes",
+  "Business owners",
+  "Working moms",
+  "Architects",
   "Freelancers",
 ];
 
@@ -20,25 +20,24 @@ export default function Home() {
             Purse It
           </p>
           <h1 className="mx-auto mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-            Diseña la bolsa perfecta para lo que llevas todos los días
+            Design the perfect bag for what you carry every day
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted">
-            Dinos qué objetos cargas y de qué tamaño quieres tu bolsa. Purse
-            It arma al momento un diseño con un compartimento pensado para
-            cada uno de ellos.
+            Tell us what you carry and what size bag you want. Purse It
+            instantly builds a design with a compartment made for each item.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <a
               href="#disenar"
               className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
             >
-              Diseñar mi bolsa
+              Design my bag
             </a>
             <Link
               href="/docs"
               className="rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-background"
             >
-              Cómo funciona
+              How it works
             </Link>
           </div>
         </div>
@@ -51,11 +50,11 @@ export default function Home() {
       <section className="border-t border-border bg-surface">
         <div className="mx-auto w-full max-w-5xl px-6 py-16">
           <h2 className="text-2xl font-semibold tracking-tight">
-            Pensado para
+            Made for
           </h2>
           <p className="mt-2 text-muted">
-            Cualquier persona que carga los mismos objetos importantes todos
-            los días y quiere una bolsa hecha a su medida.
+            Anyone who carries the same important items every day and wants
+            a bag made to fit their life.
           </p>
           <ul className="mt-6 flex flex-wrap gap-3">
             {users.map((user) => (
@@ -72,12 +71,12 @@ export default function Home() {
 
       <section className="mx-auto w-full max-w-5xl px-6 py-16">
         <h2 className="text-2xl font-semibold tracking-tight">
-          Principio de diseño
+          Design principle
         </h2>
         <p className="mt-4 max-w-2xl text-muted">
-          La experiencia es intuitiva y usa pocos materiales y colores. La
-          meta es que olvides que estás usando una herramienta y te enfoques
-          únicamente en la practicidad del diseño que recibes.
+          The experience is intuitive and uses few materials and colors. The
+          goal is for you to forget you&apos;re using a tool and focus only
+          on how practical the design you get really is.
         </p>
       </section>
     </div>

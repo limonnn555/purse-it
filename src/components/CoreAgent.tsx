@@ -15,7 +15,7 @@ type SavedCore = {
 };
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("es-MX", {
+  return new Date(iso).toLocaleDateString("en-US", {
     day: "2-digit",
     month: "short",
   });
@@ -78,22 +78,23 @@ export default function CoreAgent() {
         onSubmit={handleGenerate}
         className="rounded-2xl border border-border bg-surface p-6"
       >
-        <h2 className="text-lg font-semibold">Cuéntanos de ti</h2>
+        <h2 className="text-lg font-semibold">Tell us about yourself</h2>
         <p className="mt-1 text-sm text-muted">
-          Describe cómo es tu día y qué cargas. Entre más detalle des, más
-          preciso será tu núcleo de diseño. Por ejemplo: rutina de oficina,
-          de viaje, de ejercicio o de escuela.
+          Describe what your day looks like and what you carry. The more
+          detail you give, the more precise your design core will be. For
+          example: an office routine, a travel routine, a workout routine,
+          or a school routine.
         </p>
 
         <div className="mt-6">
           <label className="text-sm font-medium" htmlFor="core-intake">
-            ¿Cómo es tu día a día?
+            What does your day-to-day look like?
           </label>
           <textarea
             id="core-intake"
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder="Ej. Trabajo en oficina, cargo laptop y llego en bici. Los fines de semana salgo con cámara y agua."
+            placeholder="E.g. I work in an office, carry a laptop, and bike to work. On weekends I go out with a camera and water."
             rows={7}
             className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
           />
@@ -104,17 +105,17 @@ export default function CoreAgent() {
           disabled={!text.trim()}
           className="mt-6 w-full rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
         >
-          Generar bolsa ideal
+          Generate ideal bag
         </button>
       </form>
 
       <div className="rounded-2xl border border-border bg-surface p-6">
-        <h2 className="text-lg font-semibold">Tu núcleo de diseño</h2>
+        <h2 className="text-lg font-semibold">Your design core</h2>
 
         {!core && (
           <p className="mt-4 text-sm text-muted">
-            Llena el formulario y dale clic a &ldquo;Generar bolsa
-            ideal&rdquo; para ver tu núcleo de diseño aquí.
+            Fill out the form and click &ldquo;Generate ideal bag&rdquo; to
+            see your design core here.
           </p>
         )}
 
@@ -122,7 +123,7 @@ export default function CoreAgent() {
           <div className="mt-4">
             <p className="text-base font-semibold">{core.title}</p>
             <p className="mt-1 text-sm font-medium text-accent">
-              Zona prioritaria — {core.zoneLabel}
+              Priority zone — {core.zoneLabel}
             </p>
 
             <ul className="mt-4 space-y-2">
@@ -140,9 +141,9 @@ export default function CoreAgent() {
 
             {core.isFallback && (
               <p className="mt-3 text-xs text-muted">
-                No detectamos un patrón muy específico en tu descripción —
-                este es un núcleo genérico. Prueba dar más detalles de tu
-                rutina para uno más preciso.
+                We didn&apos;t detect a very specific pattern in your
+                description — this is a generic core. Try adding more detail
+                about your routine for a more precise one.
               </p>
             )}
 
@@ -152,18 +153,18 @@ export default function CoreAgent() {
               disabled={saveState === "saving"}
               className="mt-6 w-full rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-background disabled:opacity-50"
             >
-              {saveState === "saving" ? "Guardando..." : "Guardar este núcleo"}
+              {saveState === "saving" ? "Saving..." : "Save this core"}
             </button>
 
             {saveState === "saved" && (
               <p className="mt-3 text-center text-xs text-muted">
-                Núcleo guardado en tu base de datos.
+                Core saved to your database.
               </p>
             )}
             {saveState === "error" && (
               <p className="mt-3 text-center text-xs text-muted">
-                No se pudo guardar en la base de datos (revisa la conexión a
-                Supabase), pero tu núcleo sigue visible arriba.
+                Couldn&apos;t save to the database (check your Supabase
+                connection), but your core is still visible above.
               </p>
             )}
           </div>
@@ -172,9 +173,9 @@ export default function CoreAgent() {
 
       {savedList.length > 0 && (
         <div className="rounded-2xl border border-border bg-surface p-6 lg:col-span-2">
-          <h2 className="text-lg font-semibold">Núcleos guardados</h2>
+          <h2 className="text-lg font-semibold">Saved cores</h2>
           <p className="mt-1 text-sm text-muted">
-            Los últimos núcleos generados, más reciente primero.
+            Your most recently generated cores, newest first.
           </p>
           <div className="mt-4 space-y-2">
             {savedList.map((saved) => (

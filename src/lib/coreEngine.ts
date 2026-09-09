@@ -9,97 +9,96 @@ export type CoreProfile = {
   keywords: string[];
 };
 
-// Lógica basada en reglas (palabras clave), no IA generativa real.
-// Cada perfil se activa cuando el texto del usuario menciona sus palabras clave.
+// Rule-based logic (keyword matching), not a real generative AI model.
+// Each profile activates when the user's text mentions its keywords.
 export const CORE_PROFILES: CoreProfile[] = [
   {
     id: "movilidad-ligera",
-    title: "Núcleo Movilidad Ligera",
+    title: "Light Mobility Core",
     zone: "front",
     principles: [
-      "Prioriza acceso rápido sobre capacidad de carga.",
-      "Protege el equipo electrónico de la lluvia y los golpes.",
-      "Un solo compartimento grande, sin subdivisiones que estorben.",
+      "Prioritize quick access over carrying capacity.",
+      "Protect electronics from rain and bumps.",
+      "One large compartment, no subdivisions getting in the way.",
     ],
-    mantra: "Ligera, rápida, lista para moverse.",
+    mantra: "Light, fast, ready to move.",
     keywords: [
-      "oficina",
+      "office",
       "laptop",
-      "trabajo",
-      "bici",
-      "computadora",
-      "junta",
-      "reunion",
+      "work",
+      "bike",
+      "computer",
+      "meeting",
+      "commute",
     ],
   },
   {
     id: "organizacion-total",
-    title: "Núcleo Organización Total",
+    title: "Total Organization Core",
     zone: "inner",
     principles: [
-      "Separadores para que cada objeto chico tenga su propio lugar.",
-      "Prioriza no perder ni tardar en encontrar lo pequeño.",
-      "Evita un solo hueco grande donde todo se revuelve.",
+      "Dividers so every small item has its own spot.",
+      "Prioritize never losing or struggling to find the small stuff.",
+      "Avoid one big pocket where everything gets jumbled together.",
     ],
-    mantra: "Todo en su lugar, nada se pierde.",
+    mantra: "Everything in its place, nothing gets lost.",
     keywords: [
-      "llaves",
-      "maquillaje",
-      "audifonos",
-      "audífonos",
-      "cargador",
-      "lentes",
-      "plumas",
+      "keys",
+      "makeup",
+      "headphones",
+      "charger",
+      "glasses",
+      "pens",
     ],
   },
   {
     id: "viaje-constante",
-    title: "Núcleo Viaje Constante",
+    title: "Constant Travel Core",
     zone: "side",
     principles: [
-      "Protege documentos y electrónicos de golpes durante el trayecto.",
-      "Da acceso rápido a lo que pides seguido (pasaporte, tarjetas).",
-      "Resiste el uso diario sin perder su forma.",
+      "Protect documents and electronics from bumps during transit.",
+      "Give quick access to what you reach for often (passport, cards).",
+      "Hold up to daily use without losing its shape.",
     ],
-    mantra: "Preparada para lo que sea, donde sea.",
-    keywords: ["viajo", "viaje", "pasaporte", "vuelo", "avion", "avión", "maleta"],
+    mantra: "Ready for anything, anywhere.",
+    keywords: ["travel", "trip", "passport", "flight", "airplane", "suitcase"],
   },
   {
     id: "actividad-activa",
-    title: "Núcleo Actividad Activa",
+    title: "Active Lifestyle Core",
     zone: "main",
     principles: [
-      "Espacio amplio para ropa extra o equipo.",
-      "Resiste sudor, agua y movimiento constante.",
-      "Fácil de limpiar y de cargar de un lado a otro.",
+      "Roomy space for extra clothes or gear.",
+      "Withstands sweat, water, and constant movement.",
+      "Easy to clean and carry from place to place.",
     ],
-    mantra: "Lista para moverse contigo.",
-    keywords: ["ejercicio", "deporte", "gym", "correr", "entreno", "bicicleta"],
+    mantra: "Ready to move with you.",
+    keywords: ["exercise", "sports", "gym", "running", "workout", "bicycle"],
   },
   {
     id: "estudiante-enfocada",
-    title: "Núcleo Estudiante Enfocada",
+    title: "Focused Student Core",
     zone: "main",
     principles: [
-      "Espacio dedicado para libros, cuadernos y laptop sin que se doblen.",
-      "Bolsillo de acceso rápido para lo que usas entre clases.",
-      "Ligera para cargarla todo el día en la escuela.",
+      "Dedicated space for books, notebooks, and a laptop without bending them.",
+      "Quick-access pocket for what you use between classes.",
+      "Light enough to carry all day at school.",
     ],
-    mantra: "Enfocada en lo que importa, clase tras clase.",
-    keywords: ["escuela", "universidad", "clases", "cuadernos", "libros", "salon"],
+    mantra: "Focused on what matters, class after class.",
+    keywords: ["school", "university", "college", "classes", "notebooks", "books"],
   },
 ];
 
 const DEFAULT_PROFILE: CoreProfile = {
   id: "equilibrado",
-  title: "Núcleo Equilibrado",
+  title: "Balanced Core",
   zone: "main",
   principles: [
-    "Reparte el espacio entre lo esencial y lo ocasional.",
-    "No sacrifica organización ni acceso rápido.",
-    "Se adapta a días distintos sin rediseñarse.",
+    "Splits the space between the essential and the occasional.",
+    "Doesn't sacrifice organization or quick access.",
+    "Adapts to different days without needing a redesign.",
   ],
-  mantra: "Un poco de todo, balance ante todo.",
+  mantra: "A bit of everything, balance above all.",
   keywords: [],
 };
 
@@ -116,7 +115,7 @@ function normalize(text: string): string {
   return text
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[̀-ͯ]/g, "");
 }
 
 export function generateCore(inputText: string): CoreOutput {
