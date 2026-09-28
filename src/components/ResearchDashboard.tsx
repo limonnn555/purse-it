@@ -129,11 +129,12 @@ export default function ResearchDashboard() {
           <div className="mt-6 space-y-4">
             <div>
               <label className="text-sm font-medium" htmlFor="research-name">
-                Name
+                Name <span className="text-accent">*</span>
               </label>
               <input
                 id="research-name"
                 type="text"
+                required
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="E.g. Tom Bihn"
@@ -184,11 +185,12 @@ export default function ResearchDashboard() {
 
             <div>
               <label className="text-sm font-medium" htmlFor="research-region">
-                Region
+                Region <span className="text-accent">*</span>
               </label>
               <input
                 id="research-region"
                 type="text"
+                required
                 value={region}
                 onChange={(event) => setRegion(event.target.value)}
                 placeholder="E.g. Global, Mexico, US"
@@ -198,10 +200,11 @@ export default function ResearchDashboard() {
 
             <div>
               <label className="text-sm font-medium" htmlFor="research-description">
-                Description
+                Description <span className="text-accent">*</span>
               </label>
               <textarea
                 id="research-description"
+                required
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 rows={3}
