@@ -56,6 +56,19 @@ export default function DocsPage() {
             table.
           </p>
         </div>
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="font-medium">5. Research + Benchmarking (/research)</h2>
+          <p className="mt-2 text-sm text-muted">
+            <code>/research</code> tracks how Purse It compares to other ways
+            people already solve &ldquo;what should I carry this in&rdquo;:
+            global examples of similar products, direct competitors, and
+            substitutes people might pick instead (from generic backpacks to
+            packing organizers). Each entry has a category, a region, and a
+            risk level, and the page lets you filter, search, and add new
+            entries yourself — everything is saved to Supabase&apos;s{" "}
+            <code>research_entries</code> table.
+          </p>
+        </div>
       </div>
     </div>
   );
