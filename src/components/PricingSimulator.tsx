@@ -190,7 +190,8 @@ export default function PricingSimulator() {
                       type="number"
                       min={0}
                       max={field.max}
-                      value={assumptions[segment.id][field.key]}
+                      value={assumptions[segment.id][field.key] || ""}
+                      placeholder="0"
                       onChange={(event) =>
                         updateField(segment.id, field.key, event.target.value, field.max)
                       }
