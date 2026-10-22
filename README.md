@@ -81,6 +81,9 @@ src/
   app/
     page.tsx         Homepage + herramienta de diseño
     core/page.tsx     Núcleo de diseño (texto libre -> principios)
+    research/page.tsx Research + Benchmarking (competidores y ejemplos)
+    product/page.tsx  Mapa de features por plan + segmentos de cliente
+    pricing/page.tsx  Simulador de precios e ingresos
     docs/page.tsx     Cómo funciona
     roadmap/page.tsx  Roadmap del producto
     layout.tsx        Layout raíz (incluye Navbar y Footer)
@@ -88,16 +91,41 @@ src/
   components/
     Navbar.tsx
     Footer.tsx
-    BagDesigner.tsx    Formulario + diagrama del diseño generado
-    CoreAgent.tsx      Formulario + tarjeta del núcleo de diseño
+    BagDesigner.tsx        Formulario + diagrama del diseño generado
+    CoreAgent.tsx          Formulario + tarjeta del núcleo de diseño
+    ResearchDashboard.tsx  Formulario, tabla filtrable, mapa de riesgo y widget
+    PricingSimulator.tsx   Calculadora, escenarios, supuestos y guardado
   lib/
     designEngine.ts    Lógica que asigna objetos a zonas de la bolsa
     coreEngine.ts      Lógica por palabras clave que genera el núcleo
+    researchEngine.ts  Tipos y funciones de filtro/agrupación de /research
+    researchSeed.ts    Las 13 entradas de investigación (respaldo si no hay base de datos)
+    pricingEngine.ts   Planes, segmentos, escenarios y cálculo de ingresos
     supabaseClient.ts  Cliente de Supabase
+scripts/
+  pricing.test.mjs     Pruebas de la lógica de precios
 supabase/
   schema.sql           Tabla `designs` para guardar cada diseño generado
   core_schema.sql      Tabla `core_outputs` para guardar cada núcleo generado
+  research_schema.sql  Tabla `research_entries` + 13 entradas de investigación
+  pricing_schema.sql   Tabla `pricing_scenarios` para guardar escenarios
 ```
+
+## Pruebas
+
+La lógica de precios tiene pruebas con el test runner de Node:
+
+```bash
+node --test scripts/pricing.test.mjs
+```
+
+## Nota sobre Supabase
+
+El plan gratis de Supabase pausa el proyecto tras ~7 días sin actividad. Si
+`/research` o `/pricing` muestran el aviso de que la base de datos no
+respondió, restaura el proyecto desde el dashboard de Supabase (Restore
+project). `/research` muestra mientras tanto las 13 entradas incluidas en el
+código, y la calculadora de `/pricing` sigue funcionando sin base de datos.
 
 ## Deploy en Vercel
 
