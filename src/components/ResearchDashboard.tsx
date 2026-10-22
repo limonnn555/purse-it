@@ -10,6 +10,7 @@ import {
   filterEntries,
   groupByThreatLevel,
 } from "@/lib/researchEngine";
+import { SEED_ENTRIES } from "@/lib/researchSeed";
 import { supabase } from "@/lib/supabaseClient";
 
 const THREAT_STYLES: Record<ThreatLevel, string> = {
@@ -21,6 +22,7 @@ const THREAT_STYLES: Record<ThreatLevel, string> = {
 export default function ResearchDashboard() {
   const [entries, setEntries] = useState<ResearchEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [usingFallback, setUsingFallback] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState<ResearchCategory | "All">(
     "All"
   );
@@ -38,15 +40,30 @@ export default function ResearchDashboard() {
 
   useEffect(() => {
     async function loadEntries() {
-      if (!supabase) {
+      const fallback = () => {
+        setEntries(SEED_ENTRIES);
+        setUsingFallback(true);
         setLoading(false);
+      };
+      if (!supabase) {
+        fallback();
         return;
       }
-      const { data } = await supabase
-        .from("research_entries")
-        .select("*")
-        .order("created_at", { ascending: true });
-      if (data) setEntries(data as ResearchEntry[]);
+      const timeout = new Promise<null>((resolve) =>
+        setTimeout(() => resolve(null), 6000)
+      );
+      const result = await Promise.race([
+        supabase
+          .from("research_entries")
+          .select("*")
+          .order("created_at", { ascending: true }),
+        timeout,
+      ]);
+      if (!result || result.error || !result.data) {
+        fallback();
+        return;
+      }
+      setEntries(result.data as ResearchEntry[]);
       setLoading(false);
     }
     loadEntries();
@@ -64,7 +81,11 @@ export default function ResearchDashboard() {
 
   async function handleAddEntry(event: React.FormEvent) {
     event.preventDefault();
-    if (!name.trim() || !region.trim() || !description.trim() || !supabase) return;
+    if (!name.trim() || !region.trim() || !description.trim()) return;
+    if (!supabase) {
+      setSaveState("error");
+      return;
+    }
 
     setSaveState("saving");
     const { data, error } = await supabase
@@ -95,6 +116,16 @@ export default function ResearchDashboard() {
 
   return (
     <div className="space-y-10">
+      {usingFallback && (
+        <p
+          role="status"
+          className="rounded-2xl border border-border bg-surface px-5 py-4 text-sm text-muted"
+        >
+          The live database didn&apos;t respond, so this page is showing the
+          built-in research dataset (the same 13 entries). Entries you add
+          won&apos;t be saved until the connection is back.
+        </p>
+      )}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         <div className="rounded-2xl border border-border bg-surface p-4 text-center">
           <p className="text-2xl font-semibold">{entries.length}</p>
