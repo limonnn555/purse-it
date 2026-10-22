@@ -55,18 +55,35 @@ export default function PricingSimulator() {
     "idle"
   );
   const [saved, setSaved] = useState<SavedScenario[]>([]);
+  const [listState, setListState] = useState<"loading" | "ready" | "unavailable">(
+    "loading"
+  );
 
   const result = useMemo(() => calculateRevenue(assumptions), [assumptions]);
 
   useEffect(() => {
     async function loadSaved() {
-      if (!supabase) return;
-      const { data } = await supabase
-        .from("pricing_scenarios")
-        .select("id, created_at, name, scenario, monthly_revenue, annual_revenue")
-        .order("created_at", { ascending: false })
-        .limit(5);
-      if (data) setSaved(data as SavedScenario[]);
+      if (!supabase) {
+        setListState("unavailable");
+        return;
+      }
+      const timeout = new Promise<null>((resolve) =>
+        setTimeout(() => resolve(null), 6000)
+      );
+      const result = await Promise.race([
+        supabase
+          .from("pricing_scenarios")
+          .select("id, created_at, name, scenario, monthly_revenue, annual_revenue")
+          .order("created_at", { ascending: false })
+          .limit(5),
+        timeout,
+      ]);
+      if (!result || result.error || !result.data) {
+        setListState("unavailable");
+        return;
+      }
+      setSaved(result.data as SavedScenario[]);
+      setListState("ready");
     }
     loadSaved();
   }, []);
@@ -352,8 +369,18 @@ export default function PricingSimulator() {
                 </p>
               </div>
             ))}
-            {saved.length === 0 && (
+            {saved.length === 0 && listState === "loading" && (
+              <p className="text-sm text-muted">Loading saved scenarios...</p>
+            )}
+            {saved.length === 0 && listState === "ready" && (
               <p className="text-sm text-muted">No saved scenarios yet.</p>
+            )}
+            {listState === "unavailable" && (
+              <p role="status" className="text-sm text-muted">
+                Saved scenarios are unavailable because the database didn&apos;t
+                respond. The calculator above still works, and saving will work
+                again once the connection is back.
+              </p>
             )}
           </div>
         </div>
