@@ -69,6 +69,20 @@ export default function DocsPage() {
             <code>research_entries</code> table.
           </p>
         </div>
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="font-medium">6. Product + Pricing (/product, /pricing)</h2>
+          <p className="mt-2 text-sm text-muted">
+            <code>/product</code> maps every feature to the plan that includes
+            it (Free, Plus, or Studio) and shows whether it is live or
+            planned. <code>/pricing</code> is a revenue simulator: pick a
+            Conservative, Base, or Optimistic scenario, or edit visitors,
+            conversion, and plan mix for each of the two customer segments
+            (Everyday Carriers and Bag Makers). The math lives in{" "}
+            <code>src/lib/pricingEngine.ts</code> and the figures are
+            simulations, not real sales. Scenarios you name and save go to
+            Supabase&apos;s <code>pricing_scenarios</code> table.
+          </p>
+        </div>
       </div>
     </div>
   );
