@@ -136,7 +136,10 @@ node --test scripts/pricing.test.mjs scripts/marketing.test.mjs
 ## Pruebas A/B de la home
 
 La home asigna a cada visitante una variante (A o B) del titular y del botón
-principal, y guarda vistas y clics en `ab_events` (una vez por visitante).
+principal, y guarda vistas y clics en `ab_events` (una vez por visitante). Una
+vista solo cuenta cuando el visitante hace scroll, mueve el mouse, toca la
+pantalla o presiona una tecla, para no contar revisiones automáticas (por
+ejemplo las que hace Vercel al desplegar).
 Abre `/?ab_test=1` para marcar tu navegador como sesión de prueba: sus eventos
 se excluyen de los resultados que se ven en `/marketing`.
 

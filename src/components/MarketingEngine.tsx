@@ -333,7 +333,7 @@ export default function MarketingEngine() {
       <section aria-labelledby="ab">
         <SectionTitle
           title="A/B tests"
-          note="Two live tests run on the home page. Each visitor sees one variant, and views and clicks are counted once per visitor."
+          note="Two live tests run on the home page. Each visitor sees one variant, and views and clicks are counted once per visitor. A view counts after the visitor first scrolls, moves the mouse, touches the screen, or presses a key, so automated page checks are not counted."
         />
         {eventsState === "unavailable" && (
           <p role="status" className="mb-4 rounded-2xl border border-border bg-surface px-5 py-4 text-sm text-muted">

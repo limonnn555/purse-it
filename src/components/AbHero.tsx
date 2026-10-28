@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AB_TESTS, pickVariant, type TestId, type Variant } from "@/lib/abTesting";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -67,6 +67,25 @@ async function logEvent(test: TestId, variant: Variant, event: "view" | "click")
   if (!error) writeStore(key, "1");
 }
 
+const HUMAN_SIGNALS = ["pointermove", "pointerdown", "scroll", "keydown", "touchstart", "wheel"];
+
+// A view is only counted after the visitor first interacts with the page.
+// Automated page loads (for example a deployment check) never scroll, move a
+// mouse, touch, or press a key, so they are not counted as visitors.
+function createViewLogger(assigned: Record<TestId, Variant>): () => Promise<void> {
+  let started: Promise<void> | null = null;
+  return () => {
+    if (!started) {
+      started = (async () => {
+        for (const test of TESTS) {
+          await logEvent(test, assigned[test], "view");
+        }
+      })();
+    }
+    return started;
+  };
+}
+
 export default function AbHero() {
   const [variants, setVariants] = useState<Record<TestId, Variant>>({
     hero_headline: "A",
@@ -75,8 +94,11 @@ export default function AbHero() {
   // The server always renders variant A, so the text stays hidden until the
   // visitor's own variant is known. Otherwise B visitors would see A flash first.
   const [ready, setReady] = useState(false);
+  const logViews = useRef<(() => Promise<void>) | null>(null);
 
   useEffect(() => {
+    let stopListening: () => void = () => {};
+
     async function start() {
       const next: Record<TestId, Variant> = {
         hero_headline: assign("hero_headline"),
@@ -84,16 +106,31 @@ export default function AbHero() {
       };
       setVariants(next);
       setReady(true);
-      for (const test of TESTS) {
-        await logEvent(test, next[test], "view");
+
+      const log = createViewLogger(next);
+      logViews.current = log;
+      const onHumanSignal = () => {
+        stopListening();
+        void log();
+      };
+      for (const signal of HUMAN_SIGNALS) {
+        window.addEventListener(signal, onHumanSignal, { passive: true });
       }
+      stopListening = () => {
+        for (const signal of HUMAN_SIGNALS) {
+          window.removeEventListener(signal, onHumanSignal);
+        }
+      };
     }
     start();
+
+    return () => stopListening();
   }, []);
 
-  function handleCtaClick() {
+  async function handleCtaClick() {
+    await (logViews.current?.() ?? Promise.resolve());
     for (const test of TESTS) {
-      void logEvent(test, variants[test], "click");
+      await logEvent(test, variants[test], "click");
     }
   }
 

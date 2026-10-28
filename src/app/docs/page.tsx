@@ -95,8 +95,10 @@ export default function DocsPage() {
             Supabase&apos;s <code>marketing_assets</code> table. The page also
             shows two live A/B tests that run on the home page (headline and
             button label). Each visitor is assigned one variant, and views and
-            clicks are stored once per visitor in <code>ab_events</code>.
-            Visiting <code>/?ab_test=1</code> marks a browser as a test
+            clicks are stored once per visitor in <code>ab_events</code>. A
+            view is only counted after the visitor first scrolls, moves the
+            mouse, touches the screen, or presses a key, so automated page
+            checks are not counted. Visiting <code>/?ab_test=1</code> marks a browser as a test
             session, which is excluded from the results.
           </p>
         </div>
