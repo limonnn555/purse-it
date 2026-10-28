@@ -97,7 +97,8 @@ export default function AbHero() {
     }
   }
 
-  const reveal = `ab-pending transition-opacity duration-150 ${ready ? "opacity-100" : "opacity-0"}`;
+  // No fade: visibility must never depend on an animation that could stall.
+  const reveal = ready ? "" : "ab-pending opacity-0";
 
   return (
     <div>
@@ -121,7 +122,7 @@ export default function AbHero() {
         <a
           href="#disenar"
           onClick={handleCtaClick}
-          className={`rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground hover:opacity-90 ${reveal}`}
+          className={`rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 ${reveal}`}
         >
           {AB_TESTS.hero_cta.variants[variants.hero_cta]}
         </a>
