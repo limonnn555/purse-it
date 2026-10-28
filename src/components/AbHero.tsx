@@ -72,6 +72,9 @@ export default function AbHero() {
     hero_headline: "A",
     hero_cta: "A",
   });
+  // The server always renders variant A, so the text stays hidden until the
+  // visitor's own variant is known. Otherwise B visitors would see A flash first.
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     async function start() {
@@ -80,6 +83,7 @@ export default function AbHero() {
         hero_cta: assign("hero_cta"),
       };
       setVariants(next);
+      setReady(true);
       for (const test of TESTS) {
         await logEvent(test, next[test], "view");
       }
@@ -93,12 +97,19 @@ export default function AbHero() {
     }
   }
 
+  const reveal = `ab-pending transition-opacity duration-150 ${ready ? "opacity-100" : "opacity-0"}`;
+
   return (
     <div>
+      <noscript>
+        <style>{".ab-pending{opacity:1 !important}"}</style>
+      </noscript>
       <p className="text-sm font-medium uppercase tracking-wide text-accent">
         Purse It · Early access
       </p>
-      <h1 className="mt-4 max-w-xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+      <h1
+        className={`mt-4 max-w-xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl ${reveal}`}
+      >
         {AB_TESTS.hero_headline.variants[variants.hero_headline]}
       </h1>
       <p className="mt-6 max-w-lg text-lg text-muted">
@@ -110,7 +121,7 @@ export default function AbHero() {
         <a
           href="#disenar"
           onClick={handleCtaClick}
-          className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+          className={`rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground hover:opacity-90 ${reveal}`}
         >
           {AB_TESTS.hero_cta.variants[variants.hero_cta]}
         </a>
