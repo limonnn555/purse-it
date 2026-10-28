@@ -122,7 +122,7 @@ export default function AbHero() {
         <a
           href="#disenar"
           onClick={handleCtaClick}
-          className={`rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 ${reveal}`}
+          className={`rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground hover:opacity-90 ${reveal}`}
         >
           {AB_TESTS.hero_cta.variants[variants.hero_cta]}
         </a>
