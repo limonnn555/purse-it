@@ -84,6 +84,8 @@ src/
     research/page.tsx Research + Benchmarking (competidores y ejemplos)
     product/page.tsx  Mapa de features por plan + segmentos de cliente
     pricing/page.tsx  Simulador de precios e ingresos
+    marketing/page.tsx Motor de marketing: contenido, A/B tests y activos guardados
+    opengraph-image.tsx Imagen de vista previa al compartir el link
     docs/page.tsx     Cómo funciona
     roadmap/page.tsx  Roadmap del producto
     layout.tsx        Layout raíz (incluye Navbar y Footer)
@@ -95,20 +97,32 @@ src/
     CoreAgent.tsx          Formulario + tarjeta del núcleo de diseño
     ResearchDashboard.tsx  Formulario, tabla filtrable, mapa de riesgo y widget
     PricingSimulator.tsx   Calculadora, escenarios, supuestos y guardado
+    MarketingEngine.tsx    Tarjetas de contenido, resultados A/B y activos guardados
+    ContentCard.tsx        Tarjeta con botones Copy / Export / Save
+    AbHero.tsx             Hero de la home con 2 pruebas A/B (titular y botón)
+    HeroPreview.tsx        Diseño de ejemplo en la home
+    BagDiagram.tsx         Diagrama SVG de la bolsa
+    MobileNav.tsx          Menú para pantallas chicas
   lib/
     designEngine.ts    Lógica que asigna objetos a zonas de la bolsa
     coreEngine.ts      Lógica por palabras clave que genera el núcleo
     researchEngine.ts  Tipos y funciones de filtro/agrupación de /research
     researchSeed.ts    Las 13 entradas de investigación (respaldo si no hay base de datos)
     pricingEngine.ts   Planes, segmentos, escenarios y cálculo de ingresos
+    marketingContent.ts Marca, persona, copy, 10 posts, 3 guiones y calendario de 14 días
+    marketingEngine.ts Puntaje simulado de titulares y exportación a Markdown
+    abTesting.ts       Variantes A/B, conteo por visitante único y líder
+    browserTools.ts    Copiar al portapapeles y descargar archivos
     supabaseClient.ts  Cliente de Supabase
 scripts/
   pricing.test.mjs     Pruebas de la lógica de precios
+  marketing.test.mjs   Pruebas del puntaje de titulares, conteo A/B y contenido
 supabase/
   schema.sql           Tabla `designs` para guardar cada diseño generado
   core_schema.sql      Tabla `core_outputs` para guardar cada núcleo generado
   research_schema.sql  Tabla `research_entries` + 13 entradas de investigación
   pricing_schema.sql   Tabla `pricing_scenarios` para guardar escenarios
+  marketing_schema.sql Tablas `marketing_assets` y `ab_events`
 ```
 
 ## Pruebas
@@ -116,8 +130,15 @@ supabase/
 La lógica de precios tiene pruebas con el test runner de Node:
 
 ```bash
-node --test scripts/pricing.test.mjs
+node --test scripts/pricing.test.mjs scripts/marketing.test.mjs
 ```
+
+## Pruebas A/B de la home
+
+La home asigna a cada visitante una variante (A o B) del titular y del botón
+principal, y guarda vistas y clics en `ab_events` (una vez por visitante).
+Abre `/?ab_test=1` para marcar tu navegador como sesión de prueba: sus eventos
+se excluyen de los resultados que se ven en `/marketing`.
 
 ## Nota sobre Supabase
 

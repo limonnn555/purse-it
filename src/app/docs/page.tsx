@@ -83,6 +83,23 @@ export default function DocsPage() {
             Supabase&apos;s <code>pricing_scenarios</code> table.
           </p>
         </div>
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="font-medium">7. Marketing engine (/marketing)</h2>
+          <p className="mt-2 text-sm text-muted">
+            <code>/marketing</code> is the content system for launching Purse
+            It: a brand system, a target persona, landing page copy, 10 social
+            posts, 3 video scripts, and a 14-day campaign calendar. All of it
+            is template-generated from real product facts (in{" "}
+            <code>src/lib/marketingContent.ts</code>), not produced by an AI
+            model. Every card can be copied, exported as Markdown, or saved to
+            Supabase&apos;s <code>marketing_assets</code> table. The page also
+            shows two live A/B tests that run on the home page (headline and
+            button label). Each visitor is assigned one variant, and views and
+            clicks are stored once per visitor in <code>ab_events</code>.
+            Visiting <code>/?ab_test=1</code> marks a browser as a test
+            session, which is excluded from the results.
+          </p>
+        </div>
       </div>
     </div>
   );
