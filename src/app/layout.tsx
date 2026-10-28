@@ -3,10 +3,25 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const description =
+  "Purse It generates the ideal backpack, bag, or purse design based on the items you use every day. Free to try.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://purse-it.vercel.app"),
   title: "Purse It — design the perfect bag for your stuff",
-  description:
-    "Purse It generates the ideal backpack, bag, or purse design based on the items you use every day.",
+  description,
+  openGraph: {
+    title: "Purse It — your bag, designed around what you carry",
+    description,
+    url: "https://purse-it.vercel.app",
+    siteName: "Purse It",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Purse It — your bag, designed around what you carry",
+    description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

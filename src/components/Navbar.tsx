@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MobileNav from "@/components/MobileNav";
 
 const links = [
   { href: "/", label: "Home" },
@@ -7,6 +8,7 @@ const links = [
   { href: "/research", label: "Research" },
   { href: "/product", label: "Product" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/marketing", label: "Marketing" },
   { href: "/docs", label: "Docs" },
 ];
 
@@ -17,7 +19,7 @@ export default function Navbar() {
         <Link href="/" className="text-lg font-semibold tracking-tight">
           Purse It
         </Link>
-        <nav>
+        <nav className="hidden md:block" aria-label="Main">
           <ul className="flex items-center gap-6 text-sm text-muted">
             {links.map((link) => (
               <li key={link.href}>
@@ -31,6 +33,7 @@ export default function Navbar() {
             ))}
           </ul>
         </nav>
+        <MobileNav links={links} />
       </div>
     </header>
   );
