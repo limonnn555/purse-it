@@ -102,6 +102,25 @@ export default function DocsPage() {
             session, which is excluded from the results.
           </p>
         </div>
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="font-medium">8. Bag advisor (/chat)</h2>
+          <p className="mt-2 text-sm text-muted">
+            <code>/chat</code> is a guided assistant that asks 3 intake
+            questions (what you carry, where your day goes, what bugs you
+            about your current bag) and recommends a bag size, layout, and
+            design core. It is rule-based, not an AI model, and says so on the
+            page. The rules live in <code>src/lib/chatLogic.ts</code>. A
+            guardrail catches personal details (never echoed or saved),
+            abuse, medical, legal, or financial advice, off-topic requests,
+            and order or price requests, and replies with a clear
+            explanation. Order requests and low-confidence chats are flagged
+            for human review. Each chat is saved to{" "}
+            <code>chat_sessions</code> and feedback (thumbs, 1 to 5 rating,
+            comment) to <code>chat_feedback</code>. Both tables are
+            write-only for visitors, so nobody can read another person&apos;s
+            chat.
+          </p>
+        </div>
       </div>
     </div>
   );

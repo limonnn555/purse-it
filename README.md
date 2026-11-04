@@ -85,6 +85,7 @@ src/
     product/page.tsx  Mapa de features por plan + segmentos de cliente
     pricing/page.tsx  Simulador de precios e ingresos
     marketing/page.tsx Motor de marketing: contenido, A/B tests y activos guardados
+    chat/page.tsx      Asesor de bolsas: asistente guiado con 3 preguntas
     opengraph-image.tsx Imagen de vista previa al compartir el link
     docs/page.tsx     Cómo funciona
     roadmap/page.tsx  Roadmap del producto
@@ -98,6 +99,7 @@ src/
     ResearchDashboard.tsx  Formulario, tabla filtrable, mapa de riesgo y widget
     PricingSimulator.tsx   Calculadora, escenarios, supuestos y guardado
     MarketingEngine.tsx    Tarjetas de contenido, resultados A/B y activos guardados
+    ChatAssistant.tsx      Interfaz del asesor: mensajes, recomendación, revisión humana y calificación
     ContentCard.tsx        Tarjeta con botones Copy / Export / Save
     AbHero.tsx             Hero de la home con 2 pruebas A/B (titular y botón)
     HeroPreview.tsx        Diseño de ejemplo en la home
@@ -112,17 +114,20 @@ src/
     marketingContent.ts Marca, persona, copy, 10 posts, 3 guiones y calendario de 14 días
     marketingEngine.ts Puntaje simulado de titulares y exportación a Markdown
     abTesting.ts       Variantes A/B, conteo por visitante único y líder
+    chatLogic.ts       Reglas del asesor: preguntas, guardrails, tamaño y respuestas
     browserTools.ts    Copiar al portapapeles y descargar archivos
     supabaseClient.ts  Cliente de Supabase
 scripts/
   pricing.test.mjs     Pruebas de la lógica de precios
   marketing.test.mjs   Pruebas del puntaje de titulares, conteo A/B y contenido
+  chat.test.mjs        Pruebas de guardrails, interpretación de respuestas y tamaño
 supabase/
   schema.sql           Tabla `designs` para guardar cada diseño generado
   core_schema.sql      Tabla `core_outputs` para guardar cada núcleo generado
   research_schema.sql  Tabla `research_entries` + 13 entradas de investigación
   pricing_schema.sql   Tabla `pricing_scenarios` para guardar escenarios
   marketing_schema.sql Tablas `marketing_assets` y `ab_events`
+  chat_schema.sql      Tablas `chat_sessions` y `chat_feedback` (solo escritura) y la vista `chat_stats`
 ```
 
 ## Pruebas
@@ -130,8 +135,15 @@ supabase/
 La lógica de precios tiene pruebas con el test runner de Node:
 
 ```bash
-node --test scripts/pricing.test.mjs scripts/marketing.test.mjs
+node --test scripts/pricing.test.mjs scripts/marketing.test.mjs scripts/chat.test.mjs
 ```
+
+## Asesor de bolsas (/chat)
+
+Asistente guiado basado en reglas (no es IA). Las tablas del chat son de solo
+escritura para visitantes: nadie puede leer los chats de otras personas. Tú los
+lees en el Table Editor de Supabase. Para etiquetar a una persona que prueba el
+asesor, comparte `/chat?t=nombre`; tus propias pruebas usa `/chat?t=selftest`.
 
 ## Pruebas A/B de la home
 
