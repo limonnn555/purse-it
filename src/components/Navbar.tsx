@@ -9,6 +9,7 @@ const links = [
   { href: "/product", label: "Product" },
   { href: "/pricing", label: "Pricing" },
   { href: "/marketing", label: "Marketing" },
+  { href: "/chat", label: "Chat" },
   { href: "/docs", label: "Docs" },
 ];
 
@@ -19,7 +20,7 @@ export default function Navbar() {
         <Link href="/" className="text-lg font-semibold tracking-tight">
           Purse It
         </Link>
-        <nav className="hidden md:block" aria-label="Main">
+        <nav className="hidden lg:block" aria-label="Main">
           <ul className="flex items-center gap-6 text-sm text-muted">
             {links.map((link) => (
               <li key={link.href}>

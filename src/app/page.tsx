@@ -24,6 +24,11 @@ const explore = [
     body: "Every feature, what is live today, and which plan will include it.",
   },
   {
+    href: "/chat",
+    title: "Bag advisor",
+    body: "Answer 3 questions and get a recommended bag size and layout.",
+  },
+  {
     href: "/research",
     title: "Market research",
     body: `We compared Purse It against ${SEED_ENTRIES.length} existing products and alternatives.`,
@@ -65,7 +70,7 @@ export default function Home() {
           <p className="mt-2 max-w-xl text-muted">
             The designer is the start. Here is what else is built, in the open.
           </p>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {explore.map((item) => (
               <li key={item.href}>
                 <Link
