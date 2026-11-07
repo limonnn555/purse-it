@@ -384,9 +384,20 @@ export default function ChatAssistant() {
           </p>
 
           {question && (
-            <p className="mt-4 text-xs font-medium uppercase tracking-wide text-accent">
-              Question {step + 1} of 3
-            </p>
+            <div className="mt-4 flex items-center justify-between gap-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-accent">
+                Question {step + 1} of 3
+              </p>
+              {step > 0 && (
+                <button
+                  type="button"
+                  onClick={restart}
+                  className="text-xs text-muted underline-offset-2 hover:text-foreground hover:underline"
+                >
+                  Start over
+                </button>
+              )}
+            </div>
           )}
 
           <div
