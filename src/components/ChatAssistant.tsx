@@ -86,7 +86,7 @@ async function withTimeout<T>(request: PromiseLike<T>, ms = 6000): Promise<T | n
 }
 
 const chipClass =
-  "rounded-full border border-border bg-background px-3 py-1.5 text-sm transition-colors hover:border-accent disabled:opacity-50";
+  "rounded-full border border-accent/40 bg-accent/5 px-3 py-1.5 text-sm transition-colors hover:border-accent hover:bg-accent/10 disabled:opacity-50";
 
 export default function ChatAssistant() {
   const [messages, setMessages] = useState<Message[]>(intro);
@@ -372,7 +372,7 @@ export default function ChatAssistant() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
       <div className="space-y-6">
-        <section className="rounded-2xl border border-border bg-surface p-6">
+        <section className="rounded-2xl border border-border border-t-4 border-t-accent bg-surface p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-lg font-semibold">Bag advisor</h2>
             <span className="rounded-full border border-border px-3 py-1 text-xs text-muted">
@@ -416,7 +416,7 @@ export default function ChatAssistant() {
                   className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm ${
                     message.role === "user"
                       ? "bg-accent text-accent-foreground"
-                      : "border border-border bg-surface"
+                      : "border border-accent/30 bg-accent/5"
                   }`}
                 >
                   {message.text}
@@ -504,12 +504,12 @@ export default function ChatAssistant() {
         </section>
 
         {rec && (
-          <section className="rounded-2xl border border-border bg-surface p-6" aria-label="Recommendation">
+          <section className="rounded-2xl border border-border border-t-4 border-t-accent bg-accent/5 p-6" aria-label="Recommendation">
             <h2 className="text-lg font-semibold">Your recommendation</h2>
             <div className="mt-4 grid gap-6 sm:grid-cols-[220px_1fr]">
               <BagDiagram design={rec.design} />
               <div>
-                <p className="text-base font-semibold">{SIZE_LABEL[rec.size]} bag</p>
+                <p className="text-lg font-semibold text-accent">{SIZE_LABEL[rec.size]} bag</p>
                 <p className="mt-1 text-sm text-muted">{rec.reason}</p>
                 <p className="mt-4 text-sm font-medium">
                   {rec.coreTitle} · Priority zone: {rec.zoneLabel}
