@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { MAX_COMMENT_LENGTH, containsPii, sanitizeTester } from "@/lib/chatLogic";
-import { DEMO_STEPS } from "@/lib/siteMap";
+import { readDone, readTester, writeDone, writeTester } from "@/lib/demoSession";
+import { DEMO_STEPS, demoHref } from "@/lib/siteMap";
 import { supabase } from "@/lib/supabaseClient";
 
 type FeedbackState = "idle" | "sending" | "sent" | "error" | "pii";
@@ -17,16 +19,31 @@ export default function DemoWalkthrough() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [state, setState] = useState<FeedbackState>("idle");
+  const [tester, setTester] = useState<string | null>(null);
+
+  useEffect(() => {
+    const saved = readDone(DEMO_STEPS.length);
+    const tag = testerTag();
+    if (tag) writeTester(tag);
+    Promise.resolve().then(() => {
+      setDone(saved);
+      setTester(tag);
+    });
+  }, []);
 
   const finished = done.filter(Boolean).length;
 
   function toggle(index: number) {
-    setDone((prev) => prev.map((value, i) => (i === index ? !value : value)));
+    setDone((prev) => {
+      const updated = prev.map((value, i) => (i === index ? !value : value));
+      writeDone(updated);
+      return updated;
+    });
   }
 
   function testerTag(): string | null {
     try {
-      return sanitizeTester(new URLSearchParams(window.location.search).get("t"));
+      return sanitizeTester(new URLSearchParams(window.location.search).get("t")) ?? readTester();
     } catch {
       return null;
     }
@@ -63,8 +80,8 @@ export default function DemoWalkthrough() {
           </span>
         </div>
         <p className="mt-2 text-sm text-muted">
-          Six short steps, about 5 minutes. Each link opens in a new tab, so you can come back here and
-          tick it off.
+          Six short steps, about 5 minutes. Press Open to go to a step. A bar at the bottom of that page
+          brings you back here and moves you to the next step.
         </p>
         <ol className="mt-5 space-y-3">
           {DEMO_STEPS.map((step, index) => (
@@ -84,14 +101,12 @@ export default function DemoWalkthrough() {
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <a
-                    href={step.href}
-                    target="_blank"
-                    rel="noreferrer"
+                  <Link
+                    href={demoHref(step.href, index + 1, tester)}
                     className="rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
                   >
-                    Open
-                  </a>
+                    {done[index] ? "Open again" : "Open"}
+                  </Link>
                   <label className="flex items-center gap-2 text-sm">
                     <input
                       type="checkbox"

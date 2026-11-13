@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DemoBar from "@/components/DemoBar";
 
 const description =
   "Purse It generates the ideal backpack, bag, or purse design based on the items you use every day. Free to try.";
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
+        <DemoBar />
       </body>
     </html>
   );

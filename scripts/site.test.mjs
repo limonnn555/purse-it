@@ -5,6 +5,7 @@ import {
   NAV_LINKS,
   AGENTS,
   DEMO_STEPS,
+  demoHref,
   BUILD_LOGS,
   PROMPT_LIBRARY,
   IMPACT_CHECK,
@@ -37,6 +38,8 @@ test("the agent map and the guided demo are complete and point to existing pages
     const first = agent.logic.split(",")[0].trim();
     assert.ok(existsSync(`src/lib/${first}`), `${first} does not exist`);
   }
+  assert.equal(demoHref("/chat", 3), "/chat?demo=3");
+  assert.equal(demoHref("/#disenar", 1, "ana"), "/?demo=1&t=ana#disenar");
   for (const step of DEMO_STEPS) {
     assert.ok(hrefs.includes(step.href.split("#")[0] || "/"), `${step.title} links to ${step.href}`);
     assert.ok(step.action.length > 0 && step.look.length > 0);

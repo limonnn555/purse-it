@@ -123,6 +123,14 @@ export const DEMO_STEPS = [
   },
 ];
 
+// Link for a demo step. The ?demo=N tag makes the "Back to the demo" bar appear on that page;
+// the tester tag (if any) is carried along so their chats are labeled too.
+export function demoHref(href: string, step: number, tester?: string | null): string {
+  const [path, hash] = href.split("#");
+  const query = `?demo=${step}${tester ? `&t=${encodeURIComponent(tester)}` : ""}`;
+  return `${path}${query}${hash ? "#" + hash : ""}`;
+}
+
 export const BUILD_LOGS = [
   {
     week: "Week 1",
