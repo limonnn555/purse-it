@@ -205,13 +205,13 @@ export default function Dashboard() {
           <li>{TESTING_SUMMARY.logicTests} automated logic tests pass (pricing, marketing, advisor, site content).</li>
           <li>
             Full-site regression test:{" "}
-            {TESTING_SUMMARY.regression.routes > 0
-              ? `${TESTING_SUMMARY.regression.passed} of ${TESTING_SUMMARY.regression.routes} checks passed on ${TESTING_SUMMARY.regression.date}.`
+            {TESTING_SUMMARY.regression.checks > 0
+              ? `${TESTING_SUMMARY.regression.passed} of ${TESTING_SUMMARY.regression.checks} checks passed across ${TESTING_SUMMARY.regression.pages} pages on ${TESTING_SUMMARY.regression.date}.`
               : "not run yet."}
           </li>
           <li>
-            Improvements made after testing: a Start over button and more color on the advisor, and the A/B
-            counting fix from the marketing tests.
+            Improvements made after testing: a Start over button and more color on the advisor, the A/B
+            counting fix from the marketing tests, and a phone-width fix on /marketing.
           </li>
         </ul>
       </section>

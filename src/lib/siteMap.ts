@@ -252,5 +252,5 @@ export const TESTING_SUMMARY = {
   chatTesters: 3,
   logicTests: 11,
   // Filled in from the live regression run (scripts/regression.mjs).
-  regression: { date: "pending", routes: 0, passed: 0 },
+  regression: { date: "Nov 13, 2026", checks: 172, passed: 172, pages: 13 },
 };
