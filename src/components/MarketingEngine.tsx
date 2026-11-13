@@ -343,7 +343,7 @@ export default function MarketingEngine() {
         )}
         <div className="grid gap-4 lg:grid-cols-2">
           {results.map(({ id, stats, winner }) => (
-            <div key={id} className="rounded-2xl border border-border bg-surface p-6">
+            <div key={id} className="min-w-0 rounded-2xl border border-border bg-surface p-6">
               <h3 className="text-base font-semibold">{AB_TESTS[id].name}</h3>
               <p className="mt-1 text-sm text-muted">{AB_TESTS[id].question}</p>
               <div className="mt-4 overflow-x-auto">
