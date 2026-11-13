@@ -17,6 +17,8 @@ const columns = [
       { href: "/docs", label: "How it works" },
       { href: "/research", label: "Market research" },
       { href: "/marketing", label: "Marketing" },
+      { href: "/dashboard", label: "Dashboard" },
+      { href: "/demo", label: "Guided demo" },
       { href: "/roadmap", label: "Roadmap" },
     ],
   },

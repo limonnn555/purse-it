@@ -1,3 +1,5 @@
+import { ROADMAP_V2 } from "@/lib/siteMap";
+
 export const metadata = {
   title: "Roadmap — Purse It",
 };
@@ -5,28 +7,26 @@ export const metadata = {
 const roadmap = [
   {
     phase: "Today",
-    status: "Available",
+    status: "Live",
     items: [
-      "Choose bag size and daily items",
-      "Generate a design with assigned compartments",
-      "Save every generated design",
+      "Design a bag around the items you carry, with a zone for each one",
+      "Design core, bag advisor chat, market research, product map, and pricing simulator",
+      "Marketing content system with two live A/B tests",
+      "Dashboard with live records, and a guided demo with an agent map",
     ],
   },
   {
-    phase: "Coming soon",
-    status: "In development",
-    items: [
-      "More realistic design preview (colors, materials)",
-      "Save and compare multiple designs per user",
-      "Share the generated design as an image",
-    ],
+    phase: "Version 2",
+    status: "Planned next",
+    items: ROADMAP_V2.map((item) => `${item.title}: ${item.why}`),
   },
   {
     phase: "Later",
     status: "Exploring",
     items: [
+      "Save and compare multiple designs per user, with accounts",
+      "More realistic design preview (colors, materials)",
       "Estimated manufacturing quote per design",
-      "Recommendations based on the user's lifestyle",
     ],
   },
 ];

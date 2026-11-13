@@ -1,3 +1,5 @@
+import { AGENTS, BUILD_LOGS, PROMPT_LIBRARY } from "@/lib/siteMap";
+
 export const metadata = {
   title: "Docs — Purse It",
 };
@@ -121,7 +123,69 @@ export default function DocsPage() {
             chat.
           </p>
         </div>
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="font-medium">9. Dashboard and demo (/dashboard, /demo)</h2>
+          <p className="mt-2 text-sm text-muted">
+            <code>/dashboard</code> shows what every page has saved (live counts
+            and the latest records), the bag advisor totals, the testing
+            summary, and a practical impact check. <code>/demo</code> is a
+            six-step guided walkthrough of the product with an agent map, and
+            a rating box whose answers go to the write-only{" "}
+            <code>demo_feedback</code> table. The {AGENTS.length} agents on the
+            map are all rule-based, not AI. Page content for both lives in{" "}
+            <code>src/lib/siteMap.ts</code>.
+          </p>
+        </div>
       </div>
+
+      <section id="prompt-library" className="mt-12">
+        <h2 className="text-2xl font-semibold tracking-tight">Prompt library</h2>
+        <p className="mt-2 text-sm text-muted">
+          The prompts used to build each part of Purse It with a coding agent.
+        </p>
+        <ul className="mt-6 space-y-4">
+          {PROMPT_LIBRARY.map((item) => (
+            <li key={item.title} className="rounded-2xl border border-border bg-surface p-6">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="font-medium">{item.title}</h3>
+                <span className="rounded-full border border-border px-3 py-1 text-xs text-muted">
+                  {item.week}
+                </span>
+              </div>
+              <p className="mt-3 text-sm text-muted">{item.prompt}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="build-logs" className="mt-12">
+        <h2 className="text-2xl font-semibold tracking-tight">Build logs</h2>
+        <p className="mt-2 text-sm text-muted">
+          What was built and what changed after testing, week by week. Every
+          commit is on GitHub.
+        </p>
+        <ol className="mt-6 space-y-4">
+          {BUILD_LOGS.map((log) => (
+            <li key={log.week} className="rounded-2xl border border-border bg-surface p-6">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="font-medium">
+                  {log.week}: {log.title}
+                </h3>
+                <span className="rounded-full border border-border px-3 py-1 text-xs text-muted">
+                  {log.dates}
+                  {log.commits > 0 ? ` · ${log.commits} commits` : ""}
+                </span>
+              </div>
+              <p className="mt-3 text-sm text-muted">
+                <span className="font-medium text-foreground">Built:</span> {log.built}
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                <span className="font-medium text-foreground">Changed after testing:</span> {log.fixed}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
     </div>
   );
 }

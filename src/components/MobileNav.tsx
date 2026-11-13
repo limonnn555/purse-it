@@ -10,7 +10,7 @@ export default function MobileNav({ links }: { links: NavLink[] }) {
 
   // Keying on the path remounts the menu, so it closes after navigating.
   return (
-    <details key={pathname} className="relative lg:hidden">
+    <details key={pathname} className="relative xl:hidden">
       <summary className="cursor-pointer list-none rounded-full border border-border px-4 py-2 text-sm font-medium">
         Menu
       </summary>
