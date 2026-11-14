@@ -29,6 +29,10 @@ test("every navigation link points to a real page, and /dashboard and /demo are 
 test("the agent map and the guided demo are complete and point to existing pages", () => {
   assert.equal(AGENTS.length, 6);
   assert.equal(DEMO_STEPS.length, 6);
+  // Steps for the founder's tools must say there is nothing to fill in.
+  for (const step of DEMO_STEPS.filter((x) => x.kind === "look")) {
+    assert.ok(step.action.toLowerCase().includes("just look"), `${step.title} should say "just look"`);
+  }
   const hrefs = NAV_LINKS.map((l) => l.href);
   for (const agent of AGENTS) {
     assert.ok(hrefs.includes(agent.page), `${agent.name} points to ${agent.page}`);
@@ -43,6 +47,7 @@ test("the agent map and the guided demo are complete and point to existing pages
   for (const step of DEMO_STEPS) {
     assert.ok(hrefs.includes(step.href.split("#")[0] || "/"), `${step.title} links to ${step.href}`);
     assert.ok(step.action.length > 0 && step.look.length > 0);
+    assert.ok(["try", "look"].includes(step.kind), `${step.title} needs a kind`);
   }
 });
 

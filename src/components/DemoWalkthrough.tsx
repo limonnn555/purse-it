@@ -80,8 +80,9 @@ export default function DemoWalkthrough() {
           </span>
         </div>
         <p className="mt-2 text-sm text-muted">
-          Six short steps, about 5 minutes. Press Open to go to a step. A bar at the bottom of that page
-          brings you back here and moves you to the next step.
+          Six short steps, about 5 minutes. Steps 1 to 3 are for you to try. Steps 4 to 6 are behind the
+          scenes: just look, there is nothing to fill in. Press Open to go to a step; a bar at the bottom
+          of that page brings you back here and moves you to the next one.
         </p>
         <ol className="mt-5 space-y-3">
           {DEMO_STEPS.map((step, index) => (
@@ -91,7 +92,12 @@ export default function DemoWalkthrough() {
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="max-w-xl">
-                  <p className="text-xs font-medium uppercase tracking-wide text-accent">Step {index + 1}</p>
+                  <p className="text-xs font-medium uppercase tracking-wide text-accent">
+                    Step {index + 1}
+                    <span className="ml-2 rounded-full border border-border px-2 py-0.5 text-[10px] normal-case tracking-normal text-muted">
+                      {step.kind === "try" ? "Try it" : "Behind the scenes · just look"}
+                    </span>
+                  </p>
                   <p className="mt-1 font-medium">{step.title}</p>
                   <p className="mt-2 text-sm text-muted">
                     <span className="font-medium text-foreground">Do:</span> {step.action}
